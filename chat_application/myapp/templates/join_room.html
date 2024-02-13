@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+  <div class="container text-center mt-3">
+    {% include 'messa.html' %}
+    <div class="row">
+      
+      {% for group in groups %}
+      <div class="col-4">
+        <div class="card text-center mb-3" style="width: 18rem; background-color: #7200ff; border-radius: 15px;">
+            <div class="card-body">
+              <h5 class="card-title text-white">Room Name :</h5>
+              <p class="card-text text-white" style="font-size: 20px;">{{group.name}}</p>
+              <button class="btn btn-primary w-100" style="background-color: #400488; border-color: #400488; padding: 10px 3px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{group.id}}">Join Now</button>
+            </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+
+
+{% for group in groups %}
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop{{group.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel{{group.id}}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel{{group.id}}">Room Name</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align: left;">
+        <form method="POST" action="{% url 'roomvalidate' %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Room</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{group.name}}" name="room_name" readonly>
+            
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+          </div>
+          
+          
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+        <button type="submit" class="btn btn-primary">Join Now</button>
+      
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+{% endfor %}
+  </div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8" style="margin-top: 30px;">
+        {% include 'messa.html' %}
+        <h1 class="text-center" style="margin-bottom: 10px;">Create Room</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleuser" class="form-label">Enter Room Name</label>
+                <input type="text" class="form-control" id="exampleuser" aria-describedby="emailHelp" name="group" required>
+            </div>    
+            
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+            </div>
+            
+            
+            <div class="text-center" style="margin-top: 20px;">
+            <button type="submit" class="btn btn-primary w-50" style="background-color: #7200ff;">Create Now</button>
+            </div>
+          </form>
+      </div>
+      
+    </div>
+    
+  </div>
+
+{% endblock %}

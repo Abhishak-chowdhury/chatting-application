@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+
+{% block sstyle %}
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+    	                    
+
+ .portlet {
+    margin-bottom: 15px;
+}
+
+.btn-white {
+    border-color: #cccccc;
+    color: #333333;
+    background-color: #ffffff;
+}
+
+.portlet {
+    border: 1px solid;
+}
+
+.portlet .portlet-heading {
+    padding: 8px 15px;
+}
+
+.portlet .portlet-heading h4 {
+    padding: 1px 0;
+    font-size: 17px;
+}
+
+.portlet .portlet-heading a {
+    color: #fff;
+}
+
+.portlet .portlet-heading a:hover,
+.portlet .portlet-heading a:active,
+.portlet .portlet-heading a:focus {
+    outline: none;
+}
+
+.portlet .portlet-widgets .dropdown-menu a {
+    color: #333;
+}
+
+.portlet .portlet-widgets ul.dropdown-menu {
+    min-width: 0;
+}
+
+.portlet .portlet-heading .portlet-title {
+    float: left;
+}
+
+.portlet .portlet-heading .portlet-title h4 {
+    margin: 10px 0;
+}
+
+.portlet .portlet-heading .portlet-widgets {
+    float: right;
+    margin: 8px 0;
+}
+
+.portlet .portlet-heading .portlet-widgets .tabbed-portlets {
+    display: inline;
+}
+
+.portlet .portlet-heading .portlet-widgets .divider {
+    margin: 0 5px;
+}
+
+.portlet .portlet-body {
+    padding: 15px;
+    background: #fff;
+}
+
+.portlet .portlet-footer {
+    padding: 10px 15px;
+    background: #e0e7e8;
+}
+
+.portlet .portlet-footer ul {
+    margin: 0;
+}
+
+.portlet-green,
+.portlet-green>.portlet-heading {
+    border-color: #16a085;
+}
+
+.portlet-green>.portlet-heading {
+    color: #fff;
+    background-color: #16a085;
+}
+
+.portlet-orange,
+.portlet-orange>.portlet-heading {
+    border-color: #f39c12;
+}
+
+.portlet-orange>.portlet-heading {
+    color: #fff;
+    background-color: #f39c12;
+}
+
+.portlet-blue,
+.portlet-blue>.portlet-heading {
+    border-color: #2980b9;
+}
+
+.portlet-blue>.portlet-heading {
+    color: #fff;
+    background-color: #2980b9;
+}
+
+.portlet-red,
+.portlet-red>.portlet-heading {
+    border-color: #e74c3c;
+}
+
+.portlet-red>.portlet-heading {
+    color: #fff;
+    background-color: #e74c3c;
+}
+
+.portlet-purple,
+.portlet-purple>.portlet-heading {
+    border-color: #8e44ad;
+}
+
+.portlet-purple>.portlet-heading {
+    color: #fff;
+    background-color: #8e44ad;
+}
+
+.portlet-default,
+.portlet-dark-blue,
+.portlet-default>.portlet-heading,
+.portlet-dark-blue>.portlet-heading {
+    border-color: #34495e;
+}
+
+.portlet-default>.portlet-heading,
+.portlet-dark-blue>.portlet-heading {
+    color: #fff;
+    background-color: #34495e;
+}
+
+.portlet-basic,
+.portlet-basic>.portlet-heading {
+    border-color: #333;
+}
+
+.portlet-basic>.portlet-heading {
+    border-bottom: 1px solid #333;
+    color: #333;
+    background-color: #fff;
+}
+
+@media(min-width:768px) {
+    .portlet {
+        margin-bottom: 30px;
+    }
+}
+
+.img-chat{
+width:40px;
+height:40px;
+}
+
+.text-green {
+    color: #16a085;
+}
+
+.text-orange {
+    color: #f39c12;
+}
+
+.text-red {
+    color: #e74c3c;
+}                
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container bootstrap snippets bootdey">
+    <input type="hidden" value="{{chat_group_obj.name}}" id="group-name">
+    
+<div class="row">
+<div class="col-md-4 col-md-offset-4">
+<div class="portlet portlet-default">
+<div class="portlet-heading">
+<div class="portlet-title">
+<h4><i class="fa fa-circle text-green"></i> {{request.user}}</h4>
+</div>
+<div class="portlet-widgets">
+
+<span class="divider"></span>
+<a data-toggle="collapse" data-parent="#accordion" href="#chat"><i class="fa fa-chevron-down"></i></a>
+</div>
+<div class="clearfix"></div>
+</div>
+<div id="chat" class="panel-collapse collapse in">
+<div>
+<div class="portlet-body chat-widget" style="overflow-y: auto; width: auto; height: 300px;" id="adding">
+<div class="row">
+<div class="col-lg-12">
+<p class="text-center text-muted small">January 1, 2014 at 12:23 PM</p>
+</div>
+</div>
+
+{% for i in chat_objs %}
+<div class="row">
+    <div class="col-lg-12">
+    <div class="media">
+    <a class="pull-left" href="#">
+    <img class="media-object img-circle img-chat" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt>
+    </a>
+    <div class="media-body">
+    <h4 class="media-heading">{{i.user.username}}
+    <span class="small pull-right" style="margin-left: 100px; font-size: 10px;">{{i.date_time}}</span>
+    </h4>
+    <p>{{i.msg}}</p>
+    </div>
+    </div>
+    </div>
+    </div>
+    <hr>
+{% endfor %}
+</div>
+</div>
+<div class="portlet-footer">
+<form role="form">
+<div class="form-group">
+<textarea class="form-control" placeholder="Enter message..." id="message"></textarea>
+</div>
+<div class="form-group">
+<button type="button" class="btn btn-default pull-right" id="send_message">Send</button>
+<div class="clearfix"></div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    const group=document.getElementById("group-name").value;
+    var ws= new WebSocket('ws://127.0.0.1:8000/chat/'+group+'/'+'ws/sc/');
+    console.log(group);
+    ws.onopen = function(){				
+        console.log("connection open......");		//it connects with the websocket backend
+       
+    }
+    
+    ws.onmessage = function(event){
+        console.log("message received",event);		//it helps to received messages from ......
+        const msg=JSON.parse(event.data);
+        console.log(msg.message)
+        document.getElementById("adding").innerHTML+="<div class='row'><div class='col-lg-12'><div class='media'><a class='pull-left' href='#'><img class='media-object img-circle img-chat' src='https://bootdey.com/img/Content/avatar/avatar1.png' alt></a><div class='media-body'><h4 class='media-heading'>"+msg.user+"<span class='small pull-right' style='margin-left: 100px; font-size: 10px;'>now</span></h4><p>"+msg.message+"</p></div></div></div></div><hr>";
+        location.reload()
+    }
+    ws.onerror= function(event){
+        console.log("error",event);
+    }
+
+    document.getElementById("send_message").onclick = function(){
+        var message=document.getElementById("message").value;
+        ws.send(JSON.stringify({'message':message}));
+        document.getElementById("message").value='';
+    }
+</script>
+{% endblock %}
